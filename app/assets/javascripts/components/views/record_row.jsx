@@ -7,7 +7,7 @@ class RecordRow extends React.Component {
         <td>{amountFormat(this.props.record.amount)}</td>
         <td>
           <a className="btn btn-info" onClick={this.props.handleToggle}>{"Edit"}</a>
-          <a className="btn btn-danger confirm" onClick={this.props.handleDelete}>{"Delete"}</a>
+          <a className="btn btn-danger" onClick={this.props.handleDelete}>{"Delete"}</a>
         </td>
       </tr>
     )

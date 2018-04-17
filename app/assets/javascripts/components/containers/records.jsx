@@ -1,11 +1,14 @@
 class Records extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state = {records: props.data}
+    this.state = {records: props.data, errors: {}}
     this.addRecord = this.addRecord.bind(this)
     this.updateRecord = this.updateRecord.bind(this)
     this.deleteRecord = this.deleteRecord.bind(this)
+    this.setErrors = this.setErrors.bind(this)
+  }
+  setErrors(errors){
+    this.setState({errors: errors})
   }
   handleChange(e) {
     name = e.target.name;
@@ -29,7 +32,15 @@ class Records extends React.Component {
     this.setState({records: records})
   }
   render(){
-    return(<RecordsList records={this.state.records} handleChange={this.handleChange} addRecord={this.addRecord} updateRecord={this.updateRecord} deleteRecord={this.deleteRecord}/>)
+    return(
+      <RecordsList
+        records={this.state.records}
+        handleChange={this.handleChange}
+        addRecord={this.addRecord}
+        updateRecord={this.updateRecord}
+        deleteRecord={this.deleteRecord}
+        getErrors={this.setErrors}
+        errors={this.state.errors}
+      />)
   }
 };
-Records.defaultProps = { records: [] }

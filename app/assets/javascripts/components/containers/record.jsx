@@ -37,7 +37,7 @@ class Record extends React.Component {
         {this.setState({edit: false})
         this.props.handleEditRecord(this.props.record, data)},
       error: (data) =>
-        this.props.handleEditRecord(this.props.record, data.responseJSON)
+        this.props.errors(data.responseJSON)
     })
   }
   handleDelete(e){
@@ -48,6 +48,8 @@ class Record extends React.Component {
       dataType: 'JSON',
       success: () =>
         this.props.handleDeleteRecord(this.props.record)
+      ,error: (data) =>
+        this.props.errors(data.responseJSON)
     })
   }
   render(){

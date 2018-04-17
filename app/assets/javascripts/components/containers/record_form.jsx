@@ -12,9 +12,16 @@ class RecordForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    $.post('/records', { record: this.state }, (data) =>
-      {this.props.handleNewRecord(data)
-      this.setState({ title: '', date: '', amount: '' })}, 'JSON')
+    $.post({
+      url: '/records',
+      data: { record: this.state },
+      dataType: 'JSON',
+      success: (data) =>
+        {this.props.handleNewRecord(data)
+        this.setState({ title: '', date: '', amount: '' })},
+      error: (data) =>
+        this.props.getErrors(data.responseJSON)
+    });
   }
   valid() {
     if (this.state.title && this.state.date && this.state.amount){
